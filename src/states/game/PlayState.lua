@@ -18,8 +18,26 @@ function PlayState:init()
     self.gravityOn = true
     self.gravityAmount = 6
 
+    -- Get Player Position based on not empty map column
+    local playerX = 0
+
+    
+    for x = 1, self.tileMap.width do
+        local isEmpty = true
+        for y = 1, self.tileMap.height do
+            if self.tileMap.tiles[y][x].id ~= TILE_ID_EMPTY then
+                isEmpty = false
+                break
+            end
+        end
+        if not isEmpty then
+            playerX = x - 1;
+            break
+        end
+    end
+
     self.player = Player({
-        x = 0, y = 0,
+        x = playerX * TILE_SIZE, y = 0,
         width = 16, height = 20,
         texture = 'green-alien',
         stateMachine = StateMachine {
