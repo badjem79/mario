@@ -15,4 +15,4 @@ https://cs50.harvard.edu/games/2018/weeks/4/
 * When the player touches this goal post, we should regenerate the level, spawn the player at the beginning of it again (this can all be done via just reloading PlayState), and make it a little longer than it was before. You’ll need to introduce params to the PlayState:enter function that keeps track of the current level and persists the player’s score for this to work properly. The easiest way to do this is to just add an onConsume callback to each flag piece when we instantiate them in the last goal; this onConsume method should then just restart our PlayState, only now we’ll need to ensure we pass in our score and width of our game map so that we can generate a map larger than the one before it. For this, you’ll need to implement a PlayState:enter method accordingly; see prior assignments for plenty of examples on how we can achieve this! And don’t forget to edit the default gStateMachine:change('play') call to take in some default score and level width!
 
 # Video of the Demo
-https://youtu.be/XXX
+https://youtu.be/pAD44mEhjuY
