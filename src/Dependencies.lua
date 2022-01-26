@@ -31,6 +31,7 @@ require 'src/Util'
 require 'src/states/BaseState'
 require 'src/states/game/PlayState'
 require 'src/states/game/StartState'
+require 'src/states/game/WinState'
 
 -- entity states
 require 'src/states/entity/PlayerFallingState'
@@ -73,8 +74,12 @@ gTextures = {
     ['gems'] = love.graphics.newImage('graphics/gems.png'),
     ['backgrounds'] = love.graphics.newImage('graphics/backgrounds.png'),
     ['green-alien'] = love.graphics.newImage('graphics/green_alien.png'),
-    ['creatures'] = love.graphics.newImage('graphics/creatures.png')
+    ['creatures'] = love.graphics.newImage('graphics/creatures.png'),
+    ['keys'] = love.graphics.newImage('graphics/keys_and_locks.png'),
+    ['flags'] = love.graphics.newImage('graphics/flags.png')
 }
+gTextures['poles'] = gTextures['flags']
+gTextures['locks'] = gTextures['keys']
 
 gFrames = {
     ['tiles'] = GenerateQuads(gTextures['tiles'], TILE_SIZE, TILE_SIZE),
@@ -86,7 +91,11 @@ gFrames = {
     ['gems'] = GenerateQuads(gTextures['gems'], 16, 16),
     ['backgrounds'] = GenerateQuads(gTextures['backgrounds'], 256, 128),
     ['green-alien'] = GenerateQuads(gTextures['green-alien'], 16, 20),
-    ['creatures'] = GenerateQuads(gTextures['creatures'], 16, 16)
+    ['creatures'] = GenerateQuads(gTextures['creatures'], 16, 16),
+    ['keys'] =  GenerateQuads(gTextures['keys'], 16, 16),
+    ['locks'] = GenerateQuads(gTextures['locks'], 16, 16, 0, 16), -- next row
+    ['poles'] = GenerateQuads(gTextures['poles'], 16, 48),
+    ['flags'] = GenerateQuads(gTextures['flags'], 16, 16, 96, 0) -- starts from 7th column
 }
 
 -- these need to be added after gFrames is initialized because they refer to gFrames from within

@@ -53,6 +53,9 @@ PLAYER_WALK_SPEED = 60
 -- player jumping velocity
 PLAYER_JUMP_VELOCITY = -150
 
+-- COLLISION BOUNDRIES
+PLAYER_SIZE_MARGIN = 2
+
 -- snail movement speed
 SNAIL_MOVE_SPEED = 10
 
@@ -84,6 +87,16 @@ CRATES = {
 
 GEMS = {
     1, 2, 3, 4, 5, 6, 7, 8
+}
+
+KEYS = {1, 2, 3, 4}
+LOCKS = {1, 2, 3, 4}
+
+POLES = {
+    1, 2, 3, 4, 5, 6
+}
+FLAGS = {
+    1, 4
 }
 
 JUMP_BLOCKS = {}

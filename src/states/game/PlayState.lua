@@ -7,10 +7,15 @@
 
 PlayState = Class{__includes = BaseState}
 
-function PlayState:init()
+
+function PlayState:enter(params)
+
+    self.score = params.score or 0
+    self.levelN = params.levelN or 1
+    
     self.camX = 0
     self.camY = 0
-    self.level = LevelMaker.generate(100, 10)
+    self.level = LevelMaker.generate(90 + (self.levelN * 10), 10)
     self.tileMap = self.level.tileMap
     self.background = math.random(3)
     self.backgroundX = 0
@@ -20,8 +25,6 @@ function PlayState:init()
 
     -- Get Player Position based on not empty map column
     local playerX = 0
-
-    
     for x = 1, self.tileMap.width do
         local isEmpty = true
         for y = 1, self.tileMap.height do
@@ -46,6 +49,7 @@ function PlayState:init()
             ['jump'] = function() return PlayerJumpState(self.player, self.gravityAmount) end,
             ['falling'] = function() return PlayerFallingState(self.player, self.gravityAmount) end
         },
+        score = self.score,
         map = self.tileMap,
         level = self.level
     })
@@ -53,6 +57,10 @@ function PlayState:init()
     self:spawnEnemies()
 
     self.player:changeState('falling')
+end
+
+function PlayState:init()
+
 end
 
 function PlayState:update(dt)
@@ -97,6 +105,20 @@ function PlayState:render()
     love.graphics.print(tostring(self.player.score), 5, 5)
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.print(tostring(self.player.score), 4, 4)
+
+    -- render level
+    love.graphics.setColor(0, 0, 0, 1)
+    love.graphics.print("Level: " .. tostring(self.levelN), (VIRTUAL_WIDTH/2 - 20), 5)
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.print("Level: " .. tostring(self.levelN), (VIRTUAL_WIDTH/2 - 19), 4)
+
+    -- render key
+    if self.player.key then
+        -- set position to top rigth
+        self.player.key.x = (VIRTUAL_WIDTH - 18)
+        self.player.key.y = 2
+        self.player.key:render()
+    end
 end
 
 function PlayState:updateCamera()
